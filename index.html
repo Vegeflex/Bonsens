@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff684f">
+  <meta name="description" content="BONSENS — compare, calcule et dépense mieux.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>BONSENS — Dépense moins. Choisis mieux.</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="BONSENS accueil"><span class="brand-mark">B</span><span>BON<span class="brand-accent">SENS</span><small>SPEND SMARTER</small></span></a>
+      <div class="top-actions">
+        <select id="language" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option></select>
+        <button class="avatar" id="aboutBtn" aria-label="À propos">?</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow" data-i18n="heroEyebrow">TON ARGENT, TES CHOIX</span>
+          <h1 data-i18n="heroTitle">Fais le bon choix.<br><em>Garde plus pour toi.</em></h1>
+          <p data-i18n="heroText">Des outils simples pour comparer, calculer et mieux maîtriser tes dépenses.</p>
+        </div>
+        <div class="hero-sticker" aria-hidden="true"><span>€</span><b>SMART<br>MOVE!</b></div>
+      </section>
+
+      <section class="quick-stats" aria-label="Résumé">
+        <article class="stat-card stat-purple"><span data-i18n="savedLabel">Économies calculées</span><strong id="savedTotal">0,00 €</strong><small data-i18n="savedHint">Sur cet appareil</small></article>
+        <article class="stat-card stat-yellow"><span data-i18n="toolLabel">Outils pratiques</span><strong>04</strong><small data-i18n="toolHint">Prêts à utiliser</small></article>
+      </section>
+
+      <nav class="tabs" aria-label="Navigation principale">
+        <button class="tab active" data-page="home" data-i18n="navHome">Accueil</button>
+        <button class="tab" data-page="compare" data-i18n="navCompare">Comparer</button>
+        <button class="tab" data-page="discount" data-i18n="navDiscount">Promos</button>
+        <button class="tab" data-page="costs" data-i18n="navCosts">Dépenses</button>
+      </nav>
+
+      <section id="page-home" class="page active">
+        <div class="section-heading"><div><span class="eyebrow" data-i18n="startEyebrow">ON S'Y MET</span><h2 data-i18n="startTitle">Qu'est-ce qu'on calcule ?</h2></div></div>
+        <div class="tool-grid">
+          <button class="tool-card tool-coral" data-go="compare"><span class="tool-icon">⚖️</span><b data-i18n="compareTitle">Comparer les prix</b><small data-i18n="compareDesc">Quel produit est vraiment moins cher ?</small><span class="card-arrow">↗</span></button>
+          <button class="tool-card tool-yellow" data-go="discount"><span class="tool-icon">％</span><b data-i18n="discountTitle">Vérifier une promo</b><small data-i18n="discountDesc">Calcule le prix après réduction.</small><span class="card-arrow">↗</span></button>
+          <button class="tool-card tool-blue" data-go="costs"><span class="tool-icon">🧾</span><b data-i18n="costsTitle">Coût annuel</b><small data-i18n="costsDesc">Découvre le vrai coût récurrent.</small><span class="card-arrow">↗</span></button>
+          <button class="tool-card tool-green" data-go="energy"><span class="tool-icon">⚡</span><b data-i18n="energyTitle">Énergie & usage</b><small data-i18n="energyDesc">Estime le coût d'un appareil.</small><span class="card-arrow">↗</span></button>
+        </div>
+        <div class="tip-card"><span class="tip-spark">✳</span><div><b data-i18n="tipTitle">Le réflexe BONSENS</b><p data-i18n="tipText">Un prix bas n'est pas toujours une bonne affaire. Compare toujours le prix à quantité égale.</p></div></div>
+        <div class="section-heading recent-heading"><div><span class="eyebrow" data-i18n="historyEyebrow">TON PARCOURS</span><h2 data-i18n="historyTitle">Derniers calculs</h2></div><button class="text-button" id="clearHistory" data-i18n="clear">Effacer</button></div>
+        <div id="history" class="history-list"><p class="empty" data-i18n="emptyHistory">Tes calculs apparaîtront ici.</p></div>
+      </section>
+
+      <section id="page-compare" class="page">
+        <div class="page-intro"><span class="eyebrow" data-i18n="compareEyebrow">COMPARATEUR</span><h2 data-i18n="compareTitle">Comparer les prix</h2><p data-i18n="compareIntro">Entre les quantités et les prix. BONSENS calcule le coût pour une même unité.</p></div>
+        <div class="form-card">
+          <div class="field-grid">
+            <label><span data-i18n="productA">Produit A</span><input id="aName" value="Produit A" maxlength="35"></label>
+            <label><span data-i18n="price">Prix</span><div class="input-with-unit"><input id="aPrice" type="number" min="0" step="any" placeholder="4.50"><span class="currency">€</span></div></label>
+            <label><span data-i18n="quantity">Quantité</span><input id="aQty" type="number" min="0.001" step="any" placeholder="750"></label>
+            <label><span data-i18n="unit">Unité</span><select id="aUnit"><option value="g">g</option><option value="kg">kg</option><option value="ml">ml</option><option value="l">L</option><option value="unit">unité(s)</option></select></label>
+            <label><span data-i18n="productB">Produit B</span><input id="bName" value="Produit B" maxlength="35"></label>
+            <label><span data-i18n="price">Prix</span><div class="input-with-unit"><input id="bPrice" type="number" min="0" step="any" placeholder="5.20"><span class="currency">€</span></div></label>
+            <label><span data-i18n="quantity">Quantité</span><input id="bQty" type="number" min="0.001" step="any" placeholder="1000"></label>
+            <label><span data-i18n="unit">Unité</span><select id="bUnit"><option value="g">g</option><option value="kg">kg</option><option value="ml">ml</option><option value="l">L</option><option value="unit">unité(s)</option></select></label>
+          </div>
+          <button class="primary-btn" id="compareBtn" data-i18n="compareAction">Comparer les deux produits</button>
+          <div id="compareResult" class="result-box" aria-live="polite"><span class="result-label" data-i18n="resultWaiting">TON RÉSULTAT APPARAÎTRA ICI</span></div>
+        </div>
+      </section>
+
+      <section id="page-discount" class="page">
+        <div class="page-intro"><span class="eyebrow" data-i18n="discountEyebrow">CALCULATEUR DE PROMO</span><h2 data-i18n="discountTitle">Vérifier une promo</h2><p data-i18n="discountIntro">Vérifie le prix final et le montant réellement économisé.</p></div>
+        <div class="form-card">
+          <label><span data-i18n="originalPrice">Prix initial</span><div class="input-with-unit"><input id="originalPrice" type="number" min="0" step="any" placeholder="80"><span class="currency">€</span></div></label>
+          <label><span data-i18n="discountPercent">Réduction</span><div class="input-with-unit"><input id="discountPercent" type="number" min="0" max="100" step="any" placeholder="25"><span>%</span></div></label>
+          <button class="primary-btn" id="discountBtn" data-i18n="calculate">Calculer</button>
+          <div id="discountResult" class="result-box" aria-live="polite"><span class="result-label" data-i18n="resultWaiting">TON RÉSULTAT APPARAÎTRA ICI</span></div>
+        </div>
+      </section>
+
+      <section id="page-costs" class="page">
+        <div class="page-intro"><span class="eyebrow" data-i18n="costsEyebrow">DÉPENSES RÉCURRENTES</span><h2 data-i18n="costsTitle">Coût annuel</h2><p data-i18n="costsIntro">Un petit paiement régulier peut représenter une grosse somme sur l'année.</p></div>
+        <div class="form-card">
+          <label><span data-i18n="expenseName">Nom de la dépense</span><input id="expenseName" placeholder="Ex. abonnement vidéo"></label>
+          <label><span data-i18n="amount">Montant payé</span><div class="input-with-unit"><input id="expenseAmount" type="number" min="0" step="any" placeholder="12.99"><span class="currency">€</span></div></label>
+          <label><span data-i18n="frequency">Fréquence</span><select id="frequency"><option value="1" data-i18n="monthly">Chaque mois</option><option value="12" data-i18n="yearly">Chaque année</option><option value="52" data-i18n="weekly">Chaque semaine</option><option value="365" data-i18n="daily">Chaque jour</option></select></label>
+          <button class="primary-btn" id="costBtn" data-i18n="calculate">Calculer</button>
+          <div id="costResult" class="result-box" aria-live="polite"><span class="result-label" data-i18n="resultWaiting">TON RÉSULTAT APPARAÎTRA ICI</span></div>
+        </div>
+      </section>
+
+      <section id="page-energy" class="page">
+        <div class="page-intro"><span class="eyebrow" data-i18n="energyEyebrow">ÉNERGIE & USAGE</span><h2 data-i18n="energyTitle">Coût d'un appareil</h2><p data-i18n="energyIntro">Estime le coût électrique selon la puissance, la durée et ton tarif.</p></div>
+        <div class="form-card">
+          <label><span data-i18n="power">Puissance de l'appareil (W)</span><input id="power" type="number" min="0" step="any" placeholder="1000"></label>
+          <label><span data-i18n="hours">Utilisation (heures par jour)</span><input id="hours" type="number" min="0" max="24" step="any" placeholder="2"></label>
+          <label><span data-i18n="days">Nombre de jours</span><input id="days" type="number" min="0" step="1" value="30"></label>
+          <label><span data-i18n="tariff">Tarif par kWh</span><div class="input-with-unit"><input id="tariff" type="number" min="0" step="any" placeholder="0.25"><span class="currency">€/kWh</span></div></label>
+          <button class="primary-btn" id="energyBtn" data-i18n="calculate">Calculer</button>
+          <div id="energyResult" class="result-box" aria-live="polite"><span class="result-label" data-i18n="resultWaiting">TON RÉSULTAT APPARAÎTRA ICI</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer><span class="footer-brand">BONSENS ✳</span><span data-i18n="footer">Des décisions plus malines, au quotidien.</span><small>© <span id="year"></span> BONSENS · <a href="privacy.html" data-i18n="privacy">Confidentialité</a></small></footer>
+  </div>
+
+  <dialog id="aboutDialog"><div class="dialog-content"><button class="dialog-close" id="closeDialog" aria-label="Fermer">×</button><span class="brand-mark">B</span><h2>BONSENS</h2><p data-i18n="aboutText">BONSENS t'aide à comparer et comprendre tes dépenses. Les calculs sont indicatifs et restent sur ton appareil.</p><p class="fine-print" data-i18n="aboutFine">Aucun prix de magasin n'est récupéré automatiquement. Vérifie toujours les informations auprès du vendeur.</p></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
